@@ -200,6 +200,12 @@ class RjvObject extends React.PureComponent {
             <div
                 class="object-key-val"
                 {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', styles)}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (typeof this.props.onClick === 'function') {
+                        this.props.onClick(namespace, src);
+                    }
+                }}
             >
                 {this.getBraceStart(object_type, expanded)}
                 {expanded

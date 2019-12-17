@@ -60,6 +60,12 @@ export default class extends React.PureComponent {
 
         return (<div class='object-key-val'
             {...Theme(theme, jsvRoot ? 'jsv-root' : 'objectKeyVal', {paddingLeft: object_padding_left})}
+            onClick={(e) => {
+                e.stopPropagation();
+                if (typeof this.props.onClick === 'function') {
+                    this.props.onClick(namespace, src);
+                }
+            }}
         >
             <ObjectName {...this.props} />
 
@@ -78,7 +84,7 @@ export default class extends React.PureComponent {
                             {this.getExpandedIcon(i)}
                         </div>
                         {this.state.expanded[i] ?
-                            <ObjectComponent 
+                            <ObjectComponent
                                 key={name + i}
                                 depth={0}
                                 name={false}
